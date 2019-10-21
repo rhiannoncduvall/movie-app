@@ -1,0 +1,10 @@
+<div *ngFor="let movie of this.movieService.data"> 
+    <ul>
+        <li>{{ movie.title }}</li>
+        <li>{{ movie.vote_average }}</li>
+        <li><img src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}"></li>
+    </ul>
+    <ul>
+
+    </ul>
+</div>

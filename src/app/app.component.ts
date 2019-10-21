@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { APIService } from './api.service';
+import { APIDataService } from './api-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'movie-app';
+
+  constructor(public api: APIService, public data: APIDataService) {}
+
 }
