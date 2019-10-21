@@ -13,9 +13,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
 
-  showGenre(id: number) {
-    this.movieService.displayGenre(id)
+  showGenre(id: number, title: string) {
+    this.movieService.displayGenre(id, title)
   }
-
 
 }

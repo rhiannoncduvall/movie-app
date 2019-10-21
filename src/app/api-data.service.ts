@@ -44,12 +44,15 @@ export class APIDataService {
     this.apiService.getMoviesBySearch(this.searchKeywords)
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
-        console.log(this.data)
     });
   }
 
-  displayGenre(id: number) {
-    this.apiService.getByGenre(id);
+  displayGenre(id: number, title: string) {
+    this.pageTitle = title;
+    this.apiService.getByGenre(id)
+      .subscribe((res: ApiResponse) => {
+        this.data = res.results;
+    });
   }
 
 }

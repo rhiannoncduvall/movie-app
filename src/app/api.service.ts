@@ -25,7 +25,7 @@ export class APIService {
   }
 
   getByGenre(id: number) {
-    return this.http.get(``);
+    return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=287eadf0e2b2be47d6047e0f6f26a2f5&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${id}`);
   }
 
 }

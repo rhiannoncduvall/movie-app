@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit {
     this.movieService.displayMovies(this.topRatedMovies, pageTitle)
     }
 
-  changeStatus(task) {
-    let index = this.taskList.indexOf(task);
-    this.taskList[index].isDone = true;
-  }
+  // changeStatus(task) {
+  //   let index = this.taskList.indexOf(task);
+  //   this.taskList[index].isDone = true;
+  // }
 
 }
