@@ -47,9 +47,9 @@ export class APIDataService {
     });
   }
 
-  displayGenre(id: number, title: string) {
+  displayGenre(genreId: number, title: string) {
     this.pageTitle = title;
-    this.apiService.getByGenre(id)
+    this.apiService.getByGenre(genreId)
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
     });
