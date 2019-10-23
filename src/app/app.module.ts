@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
