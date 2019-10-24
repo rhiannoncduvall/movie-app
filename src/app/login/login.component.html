@@ -1,0 +1,58 @@
+<h2>Sign in with an existing account</h2>
+
+<form clrForm clrLayout="horizontal">
+    <clr-input-container>
+        <label>Username</label>
+        <input clrInput type="text" [(ngModel)]="userName" name="userName" placeholder="" required />
+        <clr-control-error>User name is required</clr-control-error>
+    </clr-input-container>
+
+    <clr-password-container>
+        <label>Password</label>
+        <input clrPassword placeholder="Password" name="password" [(ngModel)]="exampleOne" />
+        </clr-password-container>
+
+    <br><br>
+
+    <button class="btn btn-primary" type="submit">Sign in</button>
+</form>
+
+
+<h2>Create a new account</h2>
+
+<form clrForm clrLayout="horizontal">
+    <clr-input-container>
+        <label>First name</label>
+        <input clrInput type="text" [(ngModel)]="firstName" name="firstName" placeholder="Luke" required />
+        <clr-control-error>First name is required</clr-control-error>
+    </clr-input-container>
+
+    <clr-input-container>
+        <label>Last name</label>
+        <input clrInput type="text" [(ngModel)]="lastName" name="lastName" placeholder="Skywalker" required />
+        <clr-control-error>Last name is required</clr-control-error>
+    </clr-input-container>
+
+    <clr-input-container>
+        <label>Email</label>
+        <input clrInput type="email" [(ngModel)]="email" name="email" placeholder="thelastjedi@gmail.com" required />
+        <clr-control-error>Email address is required</clr-control-error>
+    </clr-input-container>
+
+    <clr-input-container>
+        <label>Username</label>
+        <input clrInput type="text" [(ngModel)]="userName" name="userName" placeholder="" required />
+        <clr-control-error>User name is required</clr-control-error>
+    </clr-input-container>
+
+    <clr-password-container>
+        <label>Password</label>
+        <input clrPassword placeholder="Password" name="password" [(ngModel)]="exampleOne" />
+        </clr-password-container>
+
+    <br><br>
+
+    <button class="btn btn-primary" type="submit">Create account</button>
+ 
+
+</form>
