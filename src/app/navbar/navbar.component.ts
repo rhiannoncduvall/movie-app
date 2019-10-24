@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIDataService } from '../api-data.service';
+import { Router, ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class NavbarComponent implements OnInit {
   nowPlayingMovies: string = "/movie/now_playing";
   keywords: string;
 
-  constructor(public movieService: APIDataService) { }
+  constructor(public movieService: APIDataService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() { }
 
@@ -25,8 +26,9 @@ export class NavbarComponent implements OnInit {
     }
 
   showSearchResults(pageTitle: string) {
+    this.router.navigate(['/home'])
     this.movieService.searchMoviesByKeyword(pageTitle);
-    console.log(this.movieService.searchKeywords)
     }
+
 
 }
