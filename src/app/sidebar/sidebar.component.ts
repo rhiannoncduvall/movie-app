@@ -17,4 +17,7 @@ export class SidebarComponent implements OnInit {
     this.movieService.displayGenre(genreId, title)
   }
 
+ // if this.movieService.pageTitle === nav-link then add class="active"
+
+
 }
