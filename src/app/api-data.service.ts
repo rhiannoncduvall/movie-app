@@ -14,6 +14,7 @@ export interface Movie {
   poster_path: string;
   overview: string;
   vote_average: number;
+  name: string;
 }
 
 @Injectable({
@@ -33,9 +34,10 @@ export class APIDataService {
     this.apiService.getMoviesByCategory(category)
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
-        // this.data.forEach((movie) => {
-        //   console.log(movie);
-        // });
+
+        this.data.forEach((movie) => {
+        console.log(movie)
+        });
       })
   } 
 
