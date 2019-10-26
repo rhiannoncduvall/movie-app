@@ -16,7 +16,7 @@ export class APIService {
   language: string = "&language=en-US";
   pageNumber: string = "&page=1";
 
-  getMoviesByCategory(category) {
+  getMoviesByCategory(category: string) {
     return this.http.get(`${this.baseUrl}${category}${this.apiKey}${this.language}${this.pageNumber}`)
   }
 
@@ -25,7 +25,7 @@ export class APIService {
   }
 
   getByGenre(genreId: number) {
-    return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=287eadf0e2b2be47d6047e0f6f26a2f5&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreId}`);
+    return this.http.get(`https://api.themoviedb.org/3/discover/movie${this.apiKey}${this.language}&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreId}`);
   }
 
 }

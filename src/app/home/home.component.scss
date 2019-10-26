@@ -1,7 +1,15 @@
 .card {
-    height: 98%
+    height: 98%;
+    display: flex;
+    flex-direction: column;
 }
 
-// .card-footer {
-//     height: 10%;
-// }
+.card-footer {
+    justify-self: flex-end;
+    align-self: baseline;
+}
+
+.clr-footer-alterations {
+    // display: flex;
+
+}
