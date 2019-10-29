@@ -1,20 +1,20 @@
 <h2>Sign in with an existing account</h2>
-
 <form clrForm clrLayout="horizontal">
     <clr-input-container>
         <label>Username</label>
-        <input clrInput type="text" [(ngModel)]="userName" name="userName" placeholder="" required />
+        <input clrInput type="text" [(ngModel)]="loginForm.username" name="userName" placeholder="" required />
         <clr-control-error>User name is required</clr-control-error>
     </clr-input-container>
 
     <clr-password-container>
         <label>Password</label>
-        <input clrPassword placeholder="Password" name="password" [(ngModel)]="exampleOne" />
+        <input clrPassword placeholder="Password" name="password" [(ngModel)]="loginForm.password" />
         </clr-password-container>
 
     <br><br>
 
-    <button class="btn btn-primary" type="submit">Sign in</button>
+    <button class="btn btn-primary" type="submit" (click)="userLogin()">Sign in</button>
+
 </form>
 
 
@@ -23,36 +23,36 @@
 <form clrForm clrLayout="horizontal">
     <clr-input-container>
         <label>First name</label>
-        <input clrInput type="text" [(ngModel)]="firstName" name="firstName" placeholder="Luke" required />
+        <input clrInput type="text" [(ngModel)]="registerForm.firstName" name="firstName" placeholder="Luke" required />
         <clr-control-error>First name is required</clr-control-error>
     </clr-input-container>
 
     <clr-input-container>
         <label>Last name</label>
-        <input clrInput type="text" [(ngModel)]="lastName" name="lastName" placeholder="Skywalker" required />
+        <input clrInput type="text" [(ngModel)]="registerForm.lastName" name="lastName" placeholder="Skywalker" required />
         <clr-control-error>Last name is required</clr-control-error>
     </clr-input-container>
 
     <clr-input-container>
         <label>Email</label>
-        <input clrInput type="email" [(ngModel)]="email" name="email" placeholder="thelastjedi@gmail.com" required />
+        <input clrInput type="email" [(ngModel)]="registerForm.email" name="email" placeholder="thelastjedi@gmail.com" required />
         <clr-control-error>Email address is required</clr-control-error>
     </clr-input-container>
 
     <clr-input-container>
         <label>Username</label>
-        <input clrInput type="text" [(ngModel)]="userName" name="userName" placeholder="" required />
+        <input clrInput type="text" [(ngModel)]="registerForm.username" name="userName" placeholder="" required />
         <clr-control-error>User name is required</clr-control-error>
     </clr-input-container>
 
     <clr-password-container>
         <label>Password</label>
-        <input clrPassword placeholder="Password" name="password" [(ngModel)]="exampleOne" />
+        <input clrPassword placeholder="Password" name="password" [(ngModel)]="registerForm.password" />
         </clr-password-container>
 
     <br><br>
 
-    <button class="btn btn-primary" type="submit">Create account</button>
+    <button class="btn btn-primary" type="submit" (click)="createAccount()">Create account</button>
  
 
 </form>

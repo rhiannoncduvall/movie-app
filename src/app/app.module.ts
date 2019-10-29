@@ -15,6 +15,8 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { LoginComponent } from './login/login.component';
+import { UserService } from './user.service';
+import { UserAPIService } from './user-api.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,7 @@ import { LoginComponent } from './login/login.component';
     ClarityModule,
     BrowserAnimationsModule
   ],
-  providers: [APIService, APIDataService],
+  providers: [APIService, APIDataService, UserAPIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

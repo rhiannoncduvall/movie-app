@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { APIDataService } from '../api-data.service';
 import { Router, ActivatedRoute} from '@angular/router';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
   nowPlayingMovies: string = "/movie/now_playing";
   keywords: string;
 
-  constructor(public movieService: APIDataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(public movieService: APIDataService, private router: Router, private route: ActivatedRoute, public userService: UserService) { }
 
   ngOnInit() { }
 
@@ -28,6 +29,10 @@ export class NavbarComponent implements OnInit {
   showSearchResults(pageTitle: string) {
     this.router.navigate(['/home'])
     this.movieService.searchMoviesByKeyword(pageTitle);
+    }
+
+    logout() {
+      this.userService.postLogout();
     }
 
 

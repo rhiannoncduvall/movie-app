@@ -19,18 +19,30 @@
         </form>
 
 <!-- Show if user is signed in -->
+<!-- 
+    logout: 
+    
+    // Remove all saved data from sessionStorage
+    sessionStorage.clear(); 
+
+    communicate with database to logout and also clear session storage
+    put in same function as the .subscribe
+
+-->
+
+
         <clr-dropdown>
             <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
-                john.doe@vmware.com
+                {{ this.userService.user.firstName }}
                 <clr-icon shape="caret down"></clr-icon>
             </button>
             <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
                 <a href="..." clrDropdownItem>Preferences</a>
-                <a href="..." clrDropdownItem>Log out</a>
+                <a (click)="logout()" clrDropdownItem>Log out</a>
             </clr-dropdown-menu>
         </clr-dropdown>
 
-<!-- Show if user is not signed in -->
+<!-- Show if user is not signed in based on if there's a token in session storage -->
 <!-- 
         <a href="javascript://" class="nav-link nav-icon-text">
             <clr-icon shape="user"></clr-icon>
