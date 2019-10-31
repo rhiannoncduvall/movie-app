@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface UserInfoBind {
   results: UserInfo;
@@ -56,6 +56,8 @@ export class UserService {
     id: null,
   }
 
+  isLoggedIn: boolean = false;
+
   // post 
   // http://localhost:3000/api/appUsers/login
 
@@ -68,14 +70,30 @@ export class UserService {
     return this.http.post("http://localhost:3000/api/appUsers/login", credentials)
   }
 
-  getUserCredentials(userId: string) {
-    return this.http.get(`http://localhost:3000/api/appUsers/${userId}`)
+  getUserCredentials() {
+    return this.http.get(`http://localhost:3000/api/appUsers/${sessionStorage.getItem('userId')}?access_token=${sessionStorage.getItem('token')}`)
+    // {headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('token'))})
   }
 
-  postLogout(token: string) {
-    return this.http.post(`http://localhost:3000/api/appUsers/logout/?access_token=${token}`, function (err) {
-      console.log(err || 'logged out');
-    });
+  // postLogout(token: string) {
+  //   return this.http.post(`http://localhost:3000/api/appUsers/logout/?access_token=${token}`, {});
+  // }
+
+
+  postLogout() {
+    return this.http.post(`http://localhost:3000/api/appUsers/logout?access_token=${sessionStorage.getItem('token')}`, {});
+  }
+
+
+  clearUserInfo() {
+    this.user = {
+      email: null,
+      firstName: null,
+      lastName: null,
+      username: null,
+      id: null,}
+      sessionStorage.clear()
+      this.isLoggedIn = false;
   }
 
   createNewAccount(newUser) {
@@ -89,10 +107,10 @@ export class UserService {
   }
 
   logoutUser() {
-    this.postLogout(sessionStorage.getItem('token')).subscribe((res) => {
-      console.log(res);
-      sessionStorage.clear()
-    })
+    this.postLogout()
+      .subscribe((res) => {
+      this.clearUserInfo();
+    }, (error) => {console.log(error)})
 
   }
 
@@ -109,6 +127,7 @@ export class UserService {
   getUserDetails(credentials) {
     this.postLogin(credentials)
       .subscribe((res: LoginResponse) => {
+        this.isLoggedIn = true;
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('userId', res.userId);
         sessionStorage.setItem('loginResponseId', res.id);
@@ -118,7 +137,7 @@ export class UserService {
 
 
   populateSessionStorage() {
-    this.getUserCredentials(sessionStorage.userId)
+    this.getUserCredentials()
       .subscribe((res: UserInfo) => {
         sessionStorage.setItem('username', res.username);
         sessionStorage.setItem('email', res.email);

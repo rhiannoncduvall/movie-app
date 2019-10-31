@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router'
 
 export interface LoginForm {
   username: string;
@@ -22,7 +23,7 @@ export interface RegisterForm {
 
 export class LoginComponent implements OnInit {
 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService, private router: Router) { }
 
   loginForm: LoginForm = {
     username: null,
@@ -40,9 +41,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  navigateToDash() {
+    this.router.navigate(['/home'])
+    // this.router.navigate(['../movie-details'], { relativeTo: this.route });
+  }
+
   userLogin() {
     // this.userService.userLogin(this.form);
     this.userService.getUserDetails(this.loginForm);
+    this.navigateToDash()
   }
 
   createAccount() {

@@ -6,7 +6,7 @@
         <a routerLink="home" (click)="showPopularMovies('Most Popular')" class="active nav-link nav-text">MyMovies</a>
         <a routerLink="home" (click)="showNowPlayingMovies('Now Playing')" class="nav-link nav-text">Now Playing</a>
         <a routerLink="home" (click)="showPopularMovies('Most Popular')" class="nav-link nav-text">Most Popular</a>
-        <a routerLink="login" class="nav-link nav-text">Log in</a>
+        <a routerLink="login" class="nav-link">Log in</a>
     </div>
 
     
@@ -31,23 +31,26 @@
 -->
 
 
+<div *ngIf="userService.isLoggedIn === false ; else userInfo">
+        <a href="javascript://" class="nav-link nav-icon-text">
+            <clr-icon shape="user"></clr-icon>
+            <span class="nav-text" routerLink="login">Log In</span>
+        </a>
+    </div>
+
+    <ng-template #userInfo>   
         <clr-dropdown>
             <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
-                {{ this.userService.user.firstName }}
+                Hello, {{ this.userService.user.firstName }}                
                 <clr-icon shape="caret down"></clr-icon>
             </button>
             <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                <a href="..." clrDropdownItem>Preferences</a>
-                <a (click)="logout()" clrDropdownItem>Log out</a>
+                <!-- <a (click)="navigateToDash()" href="..." clrDropdownItem>Preferences</a> -->
+                <p (click)="logout()" clrDropdownItem>Log out</p>
             </clr-dropdown-menu>
         </clr-dropdown>
+    </ng-template>
 
-<!-- Show if user is not signed in based on if there's a token in session storage -->
-<!-- 
-        <a href="javascript://" class="nav-link nav-icon-text">
-            <clr-icon shape="user"></clr-icon>
-            <span class="nav-text">username</span>
-        </a> -->
 
     </div>
 

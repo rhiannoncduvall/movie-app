@@ -32,8 +32,19 @@ export class NavbarComponent implements OnInit {
     }
 
     logout() {
-      this.userService.postLogout();
+      this.userService.logoutUser();
+      console.log(this.userService.isLoggedIn)
     }
 
+
+    navigateToDash() {
+      this.router.navigate(['/home'])
+      // this.router.navigate(['../movie-details'], { relativeTo: this.route });
+    }
+
+
+    AccountMenu() {
+      
+    }
 
 }

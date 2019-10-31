@@ -17,6 +17,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
 import { UserAPIService } from './user-api.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { UserAPIService } from './user-api.service';
     HttpClientModule,
     FormsModule,
     ClarityModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [APIService, APIDataService, UserAPIService],
   bootstrap: [AppComponent]
