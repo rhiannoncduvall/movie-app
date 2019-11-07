@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { APIDataService } from '../api-data.service';
+import { Router, ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-movie-details',
@@ -8,9 +10,13 @@ import { APIDataService } from '../api-data.service';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  constructor(public movieService: APIDataService) { }
+  constructor(public movieService: APIDataService, private router: Router) { }
 
   ngOnInit() {
   }
 
+
+  console() {
+    console.log(this.movieService.movieDetails)
+  }
 }

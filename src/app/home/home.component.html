@@ -3,7 +3,7 @@
     <div *ngFor="let movie of this.movieService.data" class="clr-col-lg-3 clr-col-md-4 clr-col-12">
 
         <!-- <div class="card card-size card-container clickable" (click)="navigateToMovieDetails({{ movie.id }})"> -->
-        <div class="card card-size card-container clickable" (click)="navigateToMovieDetails()">
+        <div class="card card-size card-container clickable" (click)="navigateToMovieDetails(movie.id, movie.title)">
 
             <div class="card-img">
                 <img src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}">
@@ -11,10 +11,11 @@
             <div class="card-header">
                 {{ movie.title }}
                 {{ movie.name }}
+                {{ movie.id }}
             </div>
             <div class="card-block">
                 <div class="card-text">
-                    {{ movie.overview.slice(0, 150)}}...
+                    {{ movie.overview.slice(0, 100) }}...
                 </div>
             </div>
             <div class="card-footer clr-footer-alterations">

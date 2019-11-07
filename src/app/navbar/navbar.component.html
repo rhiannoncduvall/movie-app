@@ -30,14 +30,12 @@
 
 -->
 
-
 <div *ngIf="userService.isLoggedIn === false ; else userInfo">
         <a href="javascript://" class="nav-link nav-icon-text">
-            <clr-icon shape="user"></clr-icon>
-            <span class="nav-text" routerLink="login">Log In</span>
+            <span class="nav-text" routerLink="login"><clr-icon shape="user"></clr-icon> Log In</span>
         </a>
     </div>
-
+        
     <ng-template #userInfo>   
         <clr-dropdown>
             <button class="nav-text" clrDropdownTrigger aria-label="open user profile">

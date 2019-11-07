@@ -1,12 +1,29 @@
-<!-- <div *ngFor="let movie of this.movieService.data"> 
-    <ul>
-        <li>{{ movie.title }}</li>
-        <li>{{ movie.vote_average }}</li>
-        <li><img src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}"></li>
-    </ul>
-    <ul>
+<div class="clr-row clr-justify-content-between">
+    <div class="clr-col">
+        <h2>{{ this.movieService.movieDetails.title }} ({{ this.movieService.movieDetails.release_date.slice(0, 4) }}) <span><clr-icon shape="bookmark" size="36" class="is-highlight bookmark-icon" [class.is-solid]="isFavorite"></clr-icon></span></h2>
+        <span>{{ this.movieService.movieDetails.tagline }}</span>
+    </div>
+</div>
 
-    </ul>
-</div> -->
-
-movie details works!
+<div class="clr-row">
+    <div class="clr-col-4">
+        <div class="card-img">
+            <img src="https://image.tmdb.org/t/p/w300/{{ this.movieService.movieDetails.poster_path }}">
+        </div>
+    </div>
+    <div class="clr-col">
+        <h3>Synopsis</h3>
+        <p>{{ this.movieService.movieDetails.overview }}</p>
+        <p><span *ngFor="let genre of this.movieService.movieDetails.genres">
+            <button class="btn btn-link">{{ genre.name }}</button>  
+        </span>
+        </p>
+    <p><b>Release Date: </b>{{ this.movieService.movieDetails.release_date }}</p>
+    <p><b>Production Companies:</b> 
+        <span *ngFor="let company of this.movieService.movieDetails.production_companies; index as i">
+        {{ this.company.name }}<span *ngIf="(this.movieService.movieDetails.production_companies.length) > 1 && i !== (this.movieService.movieDetails.production_companies.length - 1)">, </span>
+        </span>
+    </p>
+    <p><b>Runtime: </b>{{ this.movieService.movieDetails.runtime }} minutes</p>
+    </div>
+</div>

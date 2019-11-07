@@ -19,8 +19,9 @@ export class HomeComponent implements OnInit {
     this.movieService.displayMovies(this.topRatedMovies, pageTitle)
     }
 
-  navigateToMovieDetails(id) {
-    this.router.navigate(['/movie-details'])
+  navigateToMovieDetails(movie_id: number, title: string) {
+    this.router.navigate(['/movie-details']);
+    this.movieService.displayMovieDetails(movie_id, title);
     // this.router.navigate(['../movie-details'], { relativeTo: this.route });
   }
 

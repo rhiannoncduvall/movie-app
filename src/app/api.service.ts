@@ -20,6 +20,11 @@ export class APIService {
     return this.http.get(`${this.baseUrl}${category}${this.apiKey}${this.language}${this.pageNumber}`)
   }
 
+  getMoviesById(movie_id: number) {
+    return this.http.get(`https://api.themoviedb.org/3/movie/${movie_id}${this.apiKey}${this.language}`
+      )
+  }
+
   getMoviesBySearch(keyword: string) {
     return this.http.get(`${this.baseUrl}/search/multi${this.apiKey}${this.language}&query=${keyword}${this.pageNumber}`)
   }

@@ -15,7 +15,27 @@ export interface Movie {
   overview: string;
   vote_average: number;
   name: string;
+  genres: any[];
+
   // user_id: string;
+}
+
+// export interface MovieDetailsResponse {
+//   results: object;
+// }
+
+export interface MovieDetails {
+  title: string;
+  genres: any[];
+  imdb_id: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  tagline: string;
+  vote_average: number;
+  id: number;
+  production_companies: any[];
 }
 
 @Injectable({
@@ -27,10 +47,23 @@ export class APIDataService {
   imgBaseUrl: string = "https://image.tmdb.org/t/p/w300/";
   pageTitle: string;
   searchKeywords: string;
+  movieDetails: {
+    title: string;
+    genres: any[];
+    imdb_id: string;
+    overview: string;
+    poster_path: string;
+    release_date: string;
+    runtime: number;
+    tagline: string;
+    vote_average: number;
+    id: number;
+    production_companies: any[];
+  };
 
   constructor(public apiService: APIService) { }
 
-  displayMovies(category, title) {
+  displayMovies(category: string, title: string) {
     this.pageTitle = title;
     this.apiService.getMoviesByCategory(category)
       .subscribe((res: ApiResponse) => {
@@ -56,6 +89,16 @@ export class APIDataService {
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
     });
+  }
+
+  displayMovieDetails(movie_id: number, title: string) {
+    this.pageTitle = title;
+    this.apiService.getMoviesById(movie_id)
+      .subscribe((res: MovieDetails) => {
+        this.movieDetails = res;
+        // console.log(res)
+        console.log(this.movieDetails)
+      })
   }
 
 }

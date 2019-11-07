@@ -99,6 +99,10 @@ export class UserService {
   createNewAccount(newUser) {
     this.postNewUser(newUser)
       .subscribe((res: LoginResponse) => {
+        console.log(res)
+        if (res["error"]["statusCode"] === 422) {
+          return console.log(res["error"]["messages"])
+        }
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('userId', res.userId);
         sessionStorage.setItem('loginResponseId', res.id);
@@ -114,17 +118,8 @@ export class UserService {
 
   }
 
-  // getUserDetails() {
-  //   this.userLogin()
-  //     .subscribe((res: UserInfoBind) => {
-
-  //       this.data = res;
-  //       console.log(res.results.username)
-  //       console.log(this.data)
-  //   });
-  // }
-
   getUserDetails(credentials) {
+    console.log(credentials);
     this.postLogin(credentials)
       .subscribe((res: LoginResponse) => {
         this.isLoggedIn = true;
@@ -139,6 +134,7 @@ export class UserService {
   populateSessionStorage() {
     this.getUserCredentials()
       .subscribe((res: UserInfo) => {
+        this.isLoggedIn = true;
         sessionStorage.setItem('username', res.username);
         sessionStorage.setItem('email', res.email);
         sessionStorage.setItem('firstName', res.firstName);
