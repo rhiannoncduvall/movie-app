@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 interface UserInfoBind {
   results: UserInfo;
@@ -144,4 +145,25 @@ export class UserService {
       });
   }
 
+
+
+// POST /appUsers/{id}/movies
+//  {
+//   "title": "string",
+//   "movie_id": 0,
+//   "userId": "string"
+// }
+
+// isLoggedIn: boolean = false;
+
+  postMovie(movie_id: number, title: string) {
+    return this.http.post(`http://localhost:3000/api/appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
+  }
+
+  addFavoriteMovie(movie_id: number, title: string) {
+    this.postMovie(movie_id, title)
+      .subscribe((res) => {
+        console.log("Added to favorites")
+    }, (error) => {console.log(error)})
+  }
 }

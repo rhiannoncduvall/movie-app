@@ -15,7 +15,7 @@ export interface Movie {
   overview: string;
   vote_average: number;
   name: string;
-  genres: any[];
+  // genres: any[];
 
   // user_id: string;
 }
@@ -47,6 +47,8 @@ export class APIDataService {
   imgBaseUrl: string = "https://image.tmdb.org/t/p/w300/";
   pageTitle: string;
   searchKeywords: string;
+  movie_id: number;
+  title: string;
   movieDetails: {
     title: string;
     genres: any[];
@@ -60,6 +62,7 @@ export class APIDataService {
     id: number;
     production_companies: any[];
   };
+  pageLoading: boolean = false;
 
   constructor(public apiService: APIService) { }
 
@@ -92,12 +95,12 @@ export class APIDataService {
   }
 
   displayMovieDetails(movie_id: number, title: string) {
+    this.pageLoading = true;
     this.pageTitle = title;
     this.apiService.getMoviesById(movie_id)
       .subscribe((res: MovieDetails) => {
         this.movieDetails = res;
-        // console.log(res)
-        console.log(this.movieDetails)
+        this.pageLoading = false;
       })
   }
 

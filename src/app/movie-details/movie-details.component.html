@@ -1,6 +1,12 @@
+<span *ngIf="this.movieService.pageLoading === true; else showDetails" class="spinner"></span>
+
+<ng-template #showDetails>
 <div class="clr-row clr-justify-content-between">
     <div class="clr-col">
-        <h2>{{ this.movieService.movieDetails.title }} ({{ this.movieService.movieDetails.release_date.slice(0, 4) }}) <span><clr-icon shape="bookmark" size="36" class="is-highlight bookmark-icon" [class.is-solid]="isFavorite"></clr-icon></span></h2>
+        <h2>{{ this.movieService.movieDetails.title }} ({{ this.movieService.movieDetails.release_date.slice(0, 4) }}) <span>
+            <clr-icon shape="bookmark" size="36" class="is-highlight bookmark-icon" [class.is-solid]="isFavorite" (click)="addToFavorites(this.movieService.movieDetails.id, this.movieService.movieDetails.title)"></clr-icon>
+        
+        </span></h2>
         <span>{{ this.movieService.movieDetails.tagline }}</span>
     </div>
 </div>
@@ -27,3 +33,4 @@
     <p><b>Runtime: </b>{{ this.movieService.movieDetails.runtime }} minutes</p>
     </div>
 </div>
+</ng-template>

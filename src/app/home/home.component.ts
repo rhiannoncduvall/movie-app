@@ -12,16 +12,21 @@ export class HomeComponent implements OnInit {
   pageTitle: string;
   maxWordCountForOverView: number = 50;
 
-  constructor(public movieService: APIDataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    public movieService: APIDataService, 
+    private router: Router, 
+    private actRoute: ActivatedRoute) { }
 
 
   showTopRatedMovies(pageTitle: string) {
     this.movieService.displayMovies(this.topRatedMovies, pageTitle)
     }
 
-  navigateToMovieDetails(movie_id: number, title: string) {
-    this.router.navigate(['/movie-details']);
-    this.movieService.displayMovieDetails(movie_id, title);
+  navigateToMovieDetails(movie_id: number) {
+    // this.router.navigate(['/movie-details']);
+    this.router.navigate(['/movie-details/', movie_id]);
+
+    // this.movieService.displayMovieDetails(movie_id, title);
     // this.router.navigate(['../movie-details'], { relativeTo: this.route });
   }
 
