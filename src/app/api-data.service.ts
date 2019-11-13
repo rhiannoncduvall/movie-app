@@ -54,7 +54,7 @@ export class APIDataService {
     genres: any[];
     imdb_id: string;
     overview: string;
-    poster_path: string;
+    poster_path: any;
     release_date: string;
     runtime: number;
     tagline: string;

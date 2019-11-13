@@ -19,6 +19,7 @@ import { UserService } from './user.service';
 import { UserAPIService } from './user-api.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { environment } from '../environments/environment';
     SidebarComponent,
     FooterComponent,
     MovieDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

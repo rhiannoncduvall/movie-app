@@ -156,6 +156,14 @@ export class UserService {
 
 // isLoggedIn: boolean = false;
 
+createHeader() {
+  return new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
+}
+
+  // postMovie(movie_id: number, title: string, token: string = sessionStorage.getItem('token')) {
+  //   return this.http.post(`http://localhost:3000/api/appUsers/${this.user.id}/movies`, {"title": title, "movie_id": movie_id}, {headers: this.createHeader()});
+  // }
+
   postMovie(movie_id: number, title: string) {
     return this.http.post(`http://localhost:3000/api/appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
   }

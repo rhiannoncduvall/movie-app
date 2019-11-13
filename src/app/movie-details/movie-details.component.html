@@ -14,7 +14,7 @@
 <div class="clr-row">
     <div class="clr-col-4">
         <div class="card-img">
-            <img src="https://image.tmdb.org/t/p/w300/{{ this.movieService.movieDetails.poster_path }}">
+            <img *ngIf="this.movieService.movieDetails.poster_path !== null" src="https://image.tmdb.org/t/p/w300/{{ this.movieService.movieDetails.poster_path }}">
         </div>
     </div>
     <div class="clr-col">

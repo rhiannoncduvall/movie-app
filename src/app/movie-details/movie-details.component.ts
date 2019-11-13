@@ -22,19 +22,23 @@ export class MovieDetailsComponent implements OnInit {
       this.movie_id = this.actRoute.snapshot.params.id;
      }
 
+
+
   ngOnInit() {
   // make parameter with movie id and then load the movie details here 
   // this.router.navigate([`/movie-details/${movie_id}`]);
 
   // this.movieService.displayMovieDetails(movie_id, title);
     this.movieService.displayMovieDetails(this.movie_id, this.movieService.title)
+    // this.console()
   }
 
   addToFavorites(movie_id: number) {
     this.userService.addFavoriteMovie(movie_id, this.movieService.movieDetails.title)
   }
 
-  // console() {
-  //   console.log(this.movieService.movieDetails)
-  // }
+  console() {
+    console.log(this.movieService.movieDetails.genres)
+  }
+
 }
