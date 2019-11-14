@@ -30,7 +30,6 @@ export class MovieDetailsComponent implements OnInit {
 
   // this.movieService.displayMovieDetails(movie_id, title);
     this.movieService.displayMovieDetails(this.movie_id, this.movieService.title)
-    // this.console()
   }
 
   addToFavorites(movie_id: number) {

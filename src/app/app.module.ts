@@ -41,7 +41,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [APIService, APIDataService, UserAPIService],
+  providers: [APIService, APIDataService, UserAPIService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

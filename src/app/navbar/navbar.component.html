@@ -6,7 +6,6 @@
         <a routerLink="home" (click)="showPopularMovies('Most Popular')" class="active nav-link nav-text">MyMovies</a>
         <a routerLink="home" (click)="showNowPlayingMovies('Now Playing')" class="nav-link nav-text">Now Playing</a>
         <a routerLink="home" (click)="showPopularMovies('Most Popular')" class="nav-link nav-text">Most Popular</a>
-        <a routerLink="login" class="nav-link">Log in</a>
     </div>
 
     
@@ -36,14 +35,15 @@
         </a>
     </div>
         
-    <ng-template #userInfo>   
+    <ng-template #userInfo>
         <clr-dropdown>
             <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
                 Hello, {{ this.userService.user.firstName }}                
                 <clr-icon shape="caret down"></clr-icon>
             </button>
             <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                <!-- <a (click)="navigateToDash()" href="..." clrDropdownItem>Preferences</a> -->
+                <a (click)="navigateToDash()" clrDropdownItem>Preferences</a>
+                <p routerLink='favorites' clrDropdownItem>Favorites</p>
                 <p (click)="logout()" clrDropdownItem>Log out</p>
             </clr-dropdown-menu>
         </clr-dropdown>
