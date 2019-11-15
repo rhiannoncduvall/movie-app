@@ -188,7 +188,8 @@ export class UserService {
     return this.http.get(`http://localhost:3000/api/appUsers/${sessionStorage.getItem('userId')}/movies?access_token=${sessionStorage.getItem('token')}`)
   }
 
-  displayFavoriteMovies(favMoviesResponse: any[]) {
+// sets up observable to get all movies by id
+  joinFavMovieResponses(favMoviesResponse: any[]) {
     const favMovies = favMoviesResponse.map(movie_id => this.apiService.getMoviesById(movie_id));
     return forkJoin(favMovies);
   }
@@ -204,7 +205,7 @@ export class UserService {
           res_ids.push(res[i].movie_id);
         }
     this.userFavorites = [...new Set(res_ids)];
-    this.displayFavoriteMovies(this.userFavorites)
+    this.joinFavMovieResponses(this.userFavorites)
       .subscribe((res) => {
         this.favoriteMovieDetails = res;
         console.log(this.favoriteMovieDetails)
