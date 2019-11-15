@@ -48,14 +48,12 @@
                 </div>
             </div>
             <div class="card-footer">
-                <!-- <button class="btn btn-sm btn-link">Action</button> -->
                 <button class="btn btn-link btn-sm" id="remove-fav-btn">Remove from favorites</button>
             </div>
         </div>
     </div>
 
-<!-- 
-<a routerLink="movie-details"></a> (click)="showPopularMovies('Most Popular')" class="active nav-link nav-text">MyMovies</a> -->
+<!-- shows if user is not logged in -->
 
 <p *ngIf="this.userService.isLoggedIn === false">You are not logged in. <br>
 <a [routerLink]="['/login']">Log in or Create an Account</a></p>

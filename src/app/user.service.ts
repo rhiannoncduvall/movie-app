@@ -3,11 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { APIDataService } from './api-data.service';
 import { APIService } from './api.service';
 import { forkJoin } from 'rxjs'
-import { Title } from '@angular/platform-browser';
 
-interface UserInfoBind {
-  results: UserInfo;
-}
+// interface UserInfoBind {
+//   results: UserInfo;
+// }
 
 export interface LoginForm {
   username: string,
@@ -74,6 +73,7 @@ export class UserService {
 
   isLoggedIn: boolean = false;
   userFavorites: any[];
+
 
   // results from the favorites request
   favoriteMovieDetails: any[];
@@ -189,30 +189,37 @@ export class UserService {
   }
 
 // sets up observable to get all movies by id
-  joinFavMovieResponses(favMoviesResponse: any[]) {
-    const favMovies = favMoviesResponse.map(movie_id => this.apiService.getMoviesById(movie_id));
-    return forkJoin(favMovies);
-  }
+joinFavMovieResponses(favMoviesResponse: any[]) {
+  const favMovies = favMoviesResponse.map(movie_id => this.apiService.getMoviesById(movie_id));
+  return forkJoin(favMovies);
+}
 
 // subscribe to get request for all fav movies
 // takes an object of all fav movies and outputs an array of movie_ids as numbers
-  getFavoriteMovies() {
-    this.movieService.pageLoading = true;
-    let res_ids = [];
-    this.getUserMovies()
-      .subscribe((res) => {
-        for (let i in res) {
-          res_ids.push(res[i].movie_id);
-        }
-    this.userFavorites = [...new Set(res_ids)];
-    this.joinFavMovieResponses(this.userFavorites)
-      .subscribe((res) => {
-        this.favoriteMovieDetails = res;
-        console.log(this.favoriteMovieDetails)
-        this.movieService.pageLoading = false;
-    })
-    })
-  }
+getFavoriteMovies() {
+  this.movieService.pageLoading = true;
+  let res_ids = [];
+  this.getUserMovies()
+    .subscribe((res) => {
+      for (let i in res) {
+        res_ids.push(res[i].movie_id);
+      }
+  this.userFavorites = [...new Set(res_ids)];
+  this.joinFavMovieResponses(this.userFavorites)
+    .subscribe((res) => {
+      this.favoriteMovieDetails = res;
+      // console.log(this.favoriteMovieDetails)
+      this.movieService.pageLoading = false;
+  })
+  })
+}
 
+
+
+  // DELETE /appUsers/{id}
+// delete movie from user's favorites
+  deleteMovie(movie_id: number, title: string) {
+    return this.http.post(`http://localhost:3000/api/appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
+  }
 
 }

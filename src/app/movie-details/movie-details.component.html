@@ -21,7 +21,7 @@
         <h3>Synopsis</h3>
         <p>{{ this.movieService.movieDetails.overview }}</p>
         <p><span *ngFor="let genre of this.movieService.movieDetails.genres">
-            <button class="btn btn-link">{{ genre.name }}</button>  
+            <button class="btn btn-link">{{ genre.name }}</button>
         </span>
         </p>
     <p><b>Release Date: </b>{{ this.movieService.movieDetails.release_date }}</p>
