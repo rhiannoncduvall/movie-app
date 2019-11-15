@@ -34,7 +34,7 @@
             <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-            <a (click)="navigateToDash()" clrDropdownItem>Preferences</a>
+            <p routerLink='preferences' clrDropdownItem>Preferences</p>
             <p routerLink='favorites' clrDropdownItem>Favorites</p>
             <p (click)="logout()" clrDropdownItem>Log out</p>
         </clr-dropdown-menu>
