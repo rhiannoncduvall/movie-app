@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() { }
 
+
   showPopularMovies(pageTitle: string){
     this.movieService.displayMovies(this.popularMovies, pageTitle);
   }

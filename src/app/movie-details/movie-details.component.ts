@@ -13,6 +13,8 @@ import { UserService } from '../user.service'
 export class MovieDetailsComponent implements OnInit {
   movie_id: number;
   movie_title: string;
+  userId: string = sessionStorage.getItem('userId')
+
 
   constructor(
     public movieService: APIDataService, 
@@ -29,15 +31,26 @@ export class MovieDetailsComponent implements OnInit {
   // this.router.navigate([`/movie-details/${movie_id}`]);
 
   // this.movieService.displayMovieDetails(movie_id, title);
+
     this.movieService.displayMovieDetails(this.movie_id, this.movieService.title)
+
   }
+
 
   addToFavorites(movie_id: number) {
     this.userService.addFavoriteMovie(movie_id, this.movieService.movieDetails.title)
   }
 
-  console() {
-    console.log(this.movieService.movieDetails.genres)
+  navigateToHome() {
+    // this.router.navigate(['/movie-details']);
+    this.router.navigate(['/home']);
+
+    // this.movieService.displayMovieDetails(movie_id, title);
+    // this.router.navigate(['../movie-details'], { relativeTo: this.route });
+  }
+
+  showGenre(genreId: number, title: string) {
+    this.movieService.displayGenre(genreId, title)
   }
 
 }

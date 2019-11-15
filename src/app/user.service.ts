@@ -174,6 +174,7 @@ export class UserService {
     return this.http.post(`http://localhost:3000/api/appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
   }
 
+
 // subscribe to post request adding a movie to user's favorites on DB
 // ** change parameters to pass through movie_id and title as an object**
   addFavoriteMovie(movie_id: number, title: string) {
@@ -214,12 +215,5 @@ getFavoriteMovies() {
   })
 }
 
-
-
-  // DELETE /appUsers/{id}
-// delete movie from user's favorites
-  deleteMovie(movie_id: number, title: string) {
-    return this.http.post(`http://localhost:3000/api/appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
-  }
 
 }

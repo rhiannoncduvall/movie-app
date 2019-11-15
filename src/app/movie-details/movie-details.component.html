@@ -5,7 +5,7 @@
     <div class="clr-col">
         <h2>{{ this.movieService.movieDetails.title }} ({{ this.movieService.movieDetails.release_date.slice(0, 4) }}) <span>
             <clr-icon shape="bookmark" size="36" class="is-highlight bookmark-icon" [class.is-solid]="isFavorite" (click)="addToFavorites(this.movieService.movieDetails.id, this.movieService.movieDetails.title)"></clr-icon>
-        
+            <!-- title, id, poster_path, overview, release_date, vote_average, userId -->
         </span></h2>
         <span>{{ this.movieService.movieDetails.tagline }}</span>
     </div>
@@ -20,9 +20,15 @@
     <div class="clr-col">
         <h3>Synopsis</h3>
         <p>{{ this.movieService.movieDetails.overview }}</p>
+
+        <!-- home component loads top rated movies onInit so need to change it to be able to load genre page from here -->
+        
+        <!-- <p><span *ngFor="let genre of this.movieService.movieDetails.genres">
+            <button class="btn btn-link" (click)="showGenre(18, 'Romance')" [routerLink]="['/home']">{{ genre.name }} {{genre.id}}</button>
+        </span> -->
         <p><span *ngFor="let genre of this.movieService.movieDetails.genres">
-            <button class="btn btn-link">{{ genre.name }}</button>
-        </span>
+                <button class="btn btn-link">{{ genre.name }}</button>
+            </span>
         </p>
     <p><b>Release Date: </b>{{ this.movieService.movieDetails.release_date }}</p>
     <p><b>Production Companies:</b> 
