@@ -4,22 +4,26 @@
 <div class="clr-row clr-justify-content-between">
     <div class="clr-col">
         <h2>{{ this.movieService.movieDetails.title }} ({{ this.movieService.movieDetails.release_date.slice(0, 4) }}) <span>
-            <clr-icon shape="bookmark" size="36" class="is-highlight bookmark-icon" [class.is-solid]="isFavorite" (click)="addToFavorites(this.movieService.movieDetails.id, this.movieService.movieDetails.title)"></clr-icon>
+            <clr-icon shape="bookmark" 
+                      size="36" 
+                      class="is-highlight bookmark-icon" 
+                      (click)="addToFavorites(movieService.movieDetails.id)">
+        </clr-icon>
             <!-- title, id, poster_path, overview, release_date, vote_average, userId -->
         </span></h2>
-        <span>{{ this.movieService.movieDetails.tagline }}</span>
+        <span>{{ movieService.movieDetails.tagline }}</span>
     </div>
 </div>
 
 <div class="clr-row">
     <div class="clr-col-4">
         <div class="card-img">
-            <img *ngIf="this.movieService.movieDetails.poster_path !== null" src="https://image.tmdb.org/t/p/w300/{{ this.movieService.movieDetails.poster_path }}">
+            <img *ngIf="movieService.movieDetails.poster_path !== null" src="https://image.tmdb.org/t/p/w300/{{ movieService.movieDetails.poster_path }}">
         </div>
     </div>
     <div class="clr-col">
         <h3>Synopsis</h3>
-        <p>{{ this.movieService.movieDetails.overview }}</p>
+        <p>{{ movieService.movieDetails.overview }}</p>
 
         <!-- home component loads top rated movies onInit so need to change it to be able to load genre page from here -->
         
@@ -32,8 +36,8 @@
         </p>
     <p><b>Release Date: </b>{{ this.movieService.movieDetails.release_date }}</p>
     <p><b>Production Companies:</b> 
-        <span *ngFor="let company of this.movieService.movieDetails.production_companies; index as i">
-        {{ this.company.name }}<span *ngIf="(this.movieService.movieDetails.production_companies.length) > 1 && i !== (this.movieService.movieDetails.production_companies.length - 1)">, </span>
+        <span *ngFor="let company of movieService.movieDetails.production_companies; index as i">
+        {{ this.company.name }}<span *ngIf="(movieService.movieDetails.production_companies.length) > 1 && i !== (movieService.movieDetails.production_companies.length - 1)">, </span>
         </span>
     </p>
     <p><b>Runtime: </b>{{ this.movieService.movieDetails.runtime }} minutes</p>

@@ -11,8 +11,8 @@ import { Router } from '@angular/router'
 export class FavoritesComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
-    private movieService: APIDataService,
+    public userService: UserService,
+    public movieService: APIDataService,
     public router: Router,
   ) { }
 
