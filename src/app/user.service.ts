@@ -89,10 +89,6 @@ export class UserService {
     // {headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('token'))})
   }
 
-  // postLogout(token: string) {
-  //   return this.http.post(`http://localhost:3000/api/appUsers/logout/?access_token=${token}`, {});
-  // }
-
 // post request to log out user
   postLogout() {
     return this.http.post(`${this.baseUrl}appUsers/logout?access_token=${sessionStorage.getItem('token')}`, {});

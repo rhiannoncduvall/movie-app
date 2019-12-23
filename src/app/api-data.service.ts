@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { APIService } from './api.service';
 
 
-export interface ApiResponse { // middle man
+export interface ApiResponse {
   results: Movie[];
 }
 
@@ -15,14 +15,7 @@ export interface Movie {
   overview: string;
   vote_average: number;
   name: string;
-  // genres: any[];
-
-  // user_id: string;
 }
-
-// export interface MovieDetailsResponse {
-//   results: object;
-// }
 
 export interface MovieDetails {
   title: string;
