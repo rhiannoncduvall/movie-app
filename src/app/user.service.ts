@@ -4,10 +4,6 @@ import { APIDataService } from './api-data.service';
 import { APIService } from './api.service';
 import { forkJoin } from 'rxjs'
 
-// interface UserInfoBind {
-//   results: UserInfo;
-// }
-
 export interface LoginForm {
   username: string,
   password: string;
@@ -31,7 +27,6 @@ export interface UserInfo {
   id: string,
 }
 
-
 export interface FavoriteMovies {
   title: string;
   genres: any[];
@@ -46,7 +41,6 @@ export interface FavoriteMovies {
   production_companies: any[];
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -59,7 +53,7 @@ export class UserService {
     private apiService: APIService,
   ) { }
 
-  baseUrl: string = "http://localhost:3000/api/";
+  baseUrl: string = "https://rcd-movie-app.herokuapp.com/api/";
   appUserUrl: string = "appUsers/";
   loginUrl: string = "appUsers/login";
 
@@ -81,17 +75,17 @@ export class UserService {
 
 // post request to create new user
   postNewUser(newUser) {
-    return this.http.post(`http://localhost:3000/api/appUsers`, newUser);
+    return this.http.post(`${this.baseUrl}appUsers`, newUser);
   }
 
 // post request to log in user
   postLogin(credentials) {
-    return this.http.post("http://localhost:3000/api/appUsers/login", credentials)
+    return this.http.post(`${this.baseUrl}appUsers/login`, credentials)
   }
 
 // get request to gather user details after login
   getUserCredentials() {
-    return this.http.get(`http://localhost:3000/api/appUsers/${sessionStorage.getItem('userId')}?access_token=${sessionStorage.getItem('token')}`)
+    return this.http.get(`${this.baseUrl}appUsers/${sessionStorage.getItem('userId')}?access_token=${sessionStorage.getItem('token')}`)
     // {headers: new HttpHeaders().set('Authorization', sessionStorage.getItem('token'))})
   }
 
@@ -101,7 +95,7 @@ export class UserService {
 
 // post request to log out user
   postLogout() {
-    return this.http.post(`http://localhost:3000/api/appUsers/logout?access_token=${sessionStorage.getItem('token')}`, {});
+    return this.http.post(`${this.baseUrl}appUsers/logout?access_token=${sessionStorage.getItem('token')}`, {});
   }
 
 // clearing stored information after a user logs out
@@ -171,7 +165,7 @@ export class UserService {
 // post request for adding a movie to the DB and to the user's favorites
 // ** change parameters to pass through movie_id and title as an object**
   postMovie(movie_id: number, title: string) {
-    return this.http.post(`http://localhost:3000/api/appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
+    return this.http.post(`${this.baseUrl}appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
   }
 
 
@@ -186,7 +180,7 @@ export class UserService {
 
 // get request for grabbing all movies in a user's favorites on the DB
   getUserMovies() {
-    return this.http.get(`http://localhost:3000/api/appUsers/${sessionStorage.getItem('userId')}/movies?access_token=${sessionStorage.getItem('token')}`)
+    return this.http.get(`${this.baseUrl}appUsers/${sessionStorage.getItem('userId')}/movies?access_token=${sessionStorage.getItem('token')}`)
   }
 
 // sets up observable to get all movies by id
