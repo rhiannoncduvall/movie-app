@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { LoginComponent } from './login/login.component';
 import { UserService } from './user.service';
-import { UserAPIService } from './user-api.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FavoritesComponent } from './favorites/favorites.component';
@@ -43,7 +42,7 @@ import { PreferencesComponent } from './preferences/preferences.component';
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [APIService, APIDataService, UserAPIService, UserService],
+  providers: [APIService, APIDataService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
