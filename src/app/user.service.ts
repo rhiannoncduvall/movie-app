@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { APIDataService } from './api-data.service';
 import { APIService } from './api.service';
-import { forkJoin } from 'rxjs'
+import { forkJoin } from 'rxjs';
+import { FavMovie } from './movie-details/movie-details.component';
 
 export interface LoginForm {
   username: string,
@@ -160,15 +161,15 @@ export class UserService {
 
 // post request for adding a movie to the DB and to the user's favorites
 // ** change parameters to pass through movie_id and title as an object**
-  postMovie(movie_id: number, title: string) {
-    return this.http.post(`${this.baseUrl}appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, {"title": title, "movie_id": movie_id});
+  postMovie(favMovie: FavMovie) {
+    return this.http.post(`${this.baseUrl}appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, favMovie);
   }
 
 
 // subscribe to post request adding a movie to user's favorites on DB
 // ** change parameters to pass through movie_id and title as an object**
-  addFavoriteMovie(movie_id: number, title: string) {
-    this.postMovie(movie_id, title)
+  addFavoriteMovie(favMovie: FavMovie) {
+    this.postMovie(favMovie)
       .subscribe((res) => {
         alert("Added to favorites")
     }, (error) => {console.log(error)})

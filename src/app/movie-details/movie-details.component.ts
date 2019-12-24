@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { APIDataService } from '../api-data.service';
 import { Router, ActivatedRoute, Params, ParamMap} from '@angular/router';
-import { HomeComponent } from '../home/home.component';
 import { UserService } from '../user.service';
 import { MovieDetails } from '../api-data.service';
 import { APIService } from '../api.service';
 
+export interface FavMovie {
+  title: string,
+  movie_id: number,
+  release_date: string,
+  vote_average: number,
+  poster_path: string,
+  overview: string
+}
 
 @Component({
   selector: 'app-movie-details',
@@ -25,11 +32,20 @@ export class MovieDetailsComponent implements OnInit {
     overview: '',
     poster_path: '',
     release_date: '',
-    runtime: 0,
+    runtime: null,
     tagline: '',
-    vote_average: 0,
-    id: 0,
+    vote_average: null,
+    id: null,
     production_companies: [],
+  }
+
+  favMovie: FavMovie = {
+    title: '',
+    movie_id: null,
+    release_date: '',
+    vote_average: null,
+    poster_path: '',
+    overview: ''
   }
 
 
@@ -60,11 +76,20 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe((res: MovieDetails) => {
         this.movieDetails = res;
         this.movieService.pageLoading = false;
+
       })
   }
 
-  addToFavorites(movie_id: number) {
-    this.userService.addFavoriteMovie(movie_id, this.movieService.movieDetails.title)
+  addToFavorites() {
+    this.favMovie = {
+      title: this.movieDetails.title,
+      movie_id: this.movieDetails.id,
+      release_date: this.movieDetails.release_date,
+      vote_average: this.movieDetails.vote_average,
+      poster_path: this.movieDetails.poster_path,
+      overview: this.movieDetails.overview,
+    }
+    this.userService.addFavoriteMovie(this.favMovie)
   }
 
   navigateToHome() {

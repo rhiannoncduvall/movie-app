@@ -41,7 +41,6 @@ export class HomeComponent implements OnInit {
   navigateToMovieDetails(movie_id: number) {
     // this.router.navigate(['/movie-details']);
     this.router.navigate(['/movie-details/', movie_id]);
-    this.displayMovieDetails(movie_id);
 
     // this.movieService.displayMovieDetails(movie_id, title);
     // this.router.navigate(['../movie-details'], { relativeTo: this.route });
@@ -59,14 +58,5 @@ export class HomeComponent implements OnInit {
   // }
 
 
-  displayMovieDetails(movie_id: number, title: string) {
-    this.movieService.pageLoading = true;
-    this.pageTitle = title;
-    this.apiService.getMoviesById(movie_id)
-      .subscribe((res: MovieDetails) => {
-        this.movieDetails = res;
-        this.movieService.pageLoading = false;
-      })
-  }
 
 }
