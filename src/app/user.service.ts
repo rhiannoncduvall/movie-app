@@ -71,7 +71,7 @@ export class UserService {
 
 
   // results from the favorites request
-  favoriteMovieDetails: any[];
+  favoriteMovieDetails: any;
 
 
 // post request to create new user
@@ -185,7 +185,7 @@ export class UserService {
     this.movieService.pageLoading = true;
     this.getUserMovies()
       .subscribe((res) => {
-        console.log(res)
+        console.log('getUserFavs results: ' + res)
         this.favoriteMovieDetails = res;
         this.movieService.pageLoading = false;
     })
