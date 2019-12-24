@@ -93,7 +93,6 @@ export class APIDataService {
     });
   }
 
-  // change so movie_id and title are input as an object so this can be used for favMovies in userService also
   displayMovieDetails(movie_id: number, title: string) {
     this.pageLoading = true;
     this.pageTitle = title;

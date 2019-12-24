@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { APIDataService } from '../api-data.service';
 import { Router, ActivatedRoute, Params, ParamMap} from '@angular/router';
 import { HomeComponent } from '../home/home.component';
-import { UserService } from '../user.service'
+import { UserService } from '../user.service';
+import { MovieDetails } from '../api-data.service';
+import { APIService } from '../api.service';
 
 
 @Component({
@@ -16,8 +18,24 @@ export class MovieDetailsComponent implements OnInit {
   userId: string = sessionStorage.getItem('userId')
 
 
+  movieDetails: MovieDetails = {
+    title: '',
+    genres: [],
+    imdb_id: '',
+    overview: '',
+    poster_path: '',
+    release_date: '',
+    runtime: 0,
+    tagline: '',
+    vote_average: 0,
+    id: 0,
+    production_companies: [],
+  }
+
+
   constructor(
     public movieService: APIDataService, 
+    public apiService: APIService,
     private router: Router, 
     private actRoute: ActivatedRoute,
     public userService: UserService) {
@@ -32,10 +50,18 @@ export class MovieDetailsComponent implements OnInit {
 
   // this.movieService.displayMovieDetails(movie_id, title);
 
-    this.movieService.displayMovieDetails(this.movie_id, this.movieService.title)
+    this.displayMovieDetails(this.movie_id)
 
   }
 
+  displayMovieDetails(movie_id: number) {
+    this.movieService.pageLoading = true;
+    this.apiService.getMoviesById(movie_id)
+      .subscribe((res: MovieDetails) => {
+        this.movieDetails = res;
+        this.movieService.pageLoading = false;
+      })
+  }
 
   addToFavorites(movie_id: number) {
     this.userService.addFavoriteMovie(movie_id, this.movieService.movieDetails.title)
