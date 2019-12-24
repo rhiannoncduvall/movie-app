@@ -28,6 +28,10 @@ export interface UserInfo {
   id: string,
 }
 
+interface FavoriteMovieData { 
+  results: FavMovie[]
+}
+
 export interface FavoriteMovies {
   title: string;
   genres: any[];
@@ -68,10 +72,11 @@ export class UserService {
 
   isLoggedIn: boolean = false;
   userFavorites: any[];
+  favoriteMovieDetails: any;
 
 
   // results from the favorites request
-  favoriteMovieDetails: any;
+  // favoriteMovieDetails: any;
 
 
 // post request to create new user
@@ -169,7 +174,6 @@ export class UserService {
 // subscribe to post request adding a movie to user's favorites on DB
 // ** change parameters to pass through movie_id and title as an object**
   addFavoriteMovie(favMovie: FavMovie) {
-    console.log(favMovie)
     this.postMovie(favMovie)
       .subscribe((res) => {
         alert("Added to favorites")
@@ -184,7 +188,7 @@ export class UserService {
   getFavoriteMovies() {
     this.movieService.pageLoading = true;
     this.getUserMovies()
-      .subscribe((res) => {
+      .subscribe((res: FavoriteMovieData) => {
         console.log('getUserFavs results: ' + res)
         this.favoriteMovieDetails = res;
         this.movieService.pageLoading = false;
