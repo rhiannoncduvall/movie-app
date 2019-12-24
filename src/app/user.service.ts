@@ -73,6 +73,15 @@ export class UserService {
   isLoggedIn: boolean = false;
   userFavorites: any[];
   favoriteMovieDetails: any;
+  
+  // FavMovie = {
+  //   title: '',
+  //   movie_id: null,
+  //   release_date: '',
+  //   vote_average: null,
+  //   poster_path: '',
+  //   overview: ''
+  // };
 
 
   // results from the favorites request
@@ -188,7 +197,7 @@ export class UserService {
   getFavoriteMovies() {
     this.movieService.pageLoading = true;
     this.getUserMovies()
-      .subscribe((res: FavoriteMovieData) => {
+      .subscribe((res) => {
         console.log('getUserFavs results: ' + res)
         this.favoriteMovieDetails = res;
         this.movieService.pageLoading = false;
