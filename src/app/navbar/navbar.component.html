@@ -1,47 +1,52 @@
 <header class="header-4">
-    <!-- <div class="branding">
-        MyMovies
-    </div> -->
 
-<div class="header-nav">
-    <a routerLink="home" (click)="showPopularMovies('Most Popular')" class="active nav-link nav-text">MyMovies</a>
-    <a routerLink="home" (click)="showNowPlayingMovies('Now Playing')" class="nav-link nav-text">Now Playing</a>
-    <a routerLink="home" (click)="showPopularMovies('Most Popular')" class="nav-link nav-text">Most Popular</a>
-</div>
+    <div class="header-nav branding">
+        <a routerLink="home" 
+        (click)="showPopularMovies('Most Popular')" 
+        class="active nav-link nav-text">MyMovies</a>
 
-    
+        <a routerLink="home" 
+        (click)="showNowPlayingMovies('Now Playing')" 
+        class="nav-link nav-text">Now Playing</a>
 
-<div class="header-actions">
-    <form class="search">
-        <label for="search_input">
-            <input id="search_input" type="text" placeholder="Search for keywords..." [(ngModel)]="this.movieService.searchKeywords" [ngModelOptions]="{standalone: true}" (keydown.enter)="showSearchResults('Search Results')">
-        </label>
-    </form>
-
-
-<!-- shows if user is not logged in -->
-<div *ngIf="userService.isLoggedIn === false ; else userInfo">
-        <a href="javascript://" class="nav-link nav-icon-text">
-            <span class="nav-text" routerLink="login"><clr-icon shape="user"></clr-icon> Log In</span>
-        </a>
+        <a routerLink="home" 
+        (click)="showPopularMovies('Most Popular')" 
+        class="nav-link nav-text">Most Popular</a>
     </div>
 
-<!-- shows if user is logged in -->
-<ng-template #userInfo>
-    <clr-dropdown>
-        <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
-            Hello, {{ this.userService.user.firstName }}                
-            <clr-icon shape="caret down"></clr-icon>
-        </button>
-        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-            <p routerLink='preferences' clrDropdownItem>Preferences</p>
-            <p routerLink='favorites' clrDropdownItem>Favorites</p>
-            <p (click)="logout()" clrDropdownItem>Log out</p>
-        </clr-dropdown-menu>
-    </clr-dropdown>
-</ng-template>
+        <div class="header-actions">
+            <form class="search">
+                <label for="search_input">
+                    <input id="search_input" 
+                            type="text" 
+                            placeholder="Search for keywords..." 
+                            [(ngModel)]="movieService.searchKeywords" 
+                            [ngModelOptions]="{standalone: true}" 
+                            (keydown.enter)="showSearchResults('Search Results')">
+                </label>
+            </form>
 
+        <!-- shows if user is not logged in -->
+        <div *ngIf="userService.isLoggedIn === false ; else userInfo">
+            <a href="javascript://" class="nav-link nav-icon-text">
+                <span class="nav-text" routerLink="login"><clr-icon shape="user"></clr-icon> Log In</span>
+            </a>
+        </div>
+
+        <!-- shows if user is logged in -->
+        <ng-template #userInfo>
+            <clr-dropdown>
+                <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                    Hello, {{ userService.user.firstName }}                
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                    <p routerLink='preferences' clrDropdownItem>Preferences</p>
+                    <p routerLink='favorites' clrDropdownItem>Favorites</p>
+                    <p (click)="logout()" clrDropdownItem>Log out</p>
+                </clr-dropdown-menu>
+            </clr-dropdown>
+        </ng-template>
 
     </div>
-
 </header>

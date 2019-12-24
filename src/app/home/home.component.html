@@ -1,6 +1,9 @@
-<h1>{{ this.movieService.pageTitle }}</h1>
+<span *ngIf="movieService.pageLoading === true; else showDetails" class="spinner"></span>
+
+<ng-template #showDetails>
+<h1>{{ movieService.pageTitle }}</h1>
 <div class="clr-row clr-justify-content-between">
-    <div *ngFor="let movie of this.movieService.data" class="clr-col-lg-3 clr-col-md-4 clr-col-12">
+    <div *ngFor="let movie of movieService.data" class="clr-col-lg-3 clr-col-md-4 clr-col-12">
 
         <div class="card card-size card-container clickable" (click)="navigateToMovieDetails(movie.id)">
         <!-- <a [routerLink]="['/movie-details/', movie.id]">Details</a> -->
@@ -13,9 +16,12 @@
                 <!-- {{ movie.id }} -->
             </div>
             <div class="card-block">
-                <div class="card-text">
+                <div class="card-text" *ngIf="movie.overview.length > 100; else overview">
                     {{ movie.overview.slice(0, 100) }}...
                 </div>
+                <ng-template class="card-text" #overview>
+                    {{ movie.overview }}
+                </ng-template>
             </div>
             <div class="card-footer clr-footer-alterations">
                 <button class="btn btn-primary btn-sm">{{ movie.vote_average }} <clr-icon shape="star"></clr-icon></button>
@@ -24,6 +30,6 @@
         </div>
     </div>
 </div>
-
+</ng-template>
 <!-- 
 <a routerLink="movie-details"></a> (click)="showPopularMovies('Most Popular')" class="active nav-link nav-text">MyMovies</a> -->

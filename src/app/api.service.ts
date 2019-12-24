@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-
 export class APIService {
 
   constructor(private http: HttpClient) { }
@@ -21,7 +20,7 @@ export class APIService {
   }
 
   getMoviesById(movie_id: number) {
-    return this.http.get(`https://api.themoviedb.org/3/movie/${movie_id}${this.apiKey}${this.language}`
+    return this.http.get(`${this.baseUrl}/movie/${movie_id}${this.apiKey}${this.language}`
       )
   }
 
@@ -30,17 +29,14 @@ export class APIService {
   }
 
   getByGenre(genreId: number) {
-    return this.http.get(`https://api.themoviedb.org/3/discover/movie${this.apiKey}${this.language}&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreId}`);
+    return this.http.get(`${this.baseUrl}/discover/movie${this.apiKey}${this.language}&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreId}`);
   }
-
 }
 
 
 // popular
-// https://api.themoviedb.org/3/movie/popular?api_key=287eadf0e2b2be47d6047e0f6f26a2f5&language=en-US&page=1
+// ${this.baseUrl}/movie/popular?api_key=287eadf0e2b2be47d6047e0f6f26a2f5&language=en-US&page=1
 
 
 // now Playing
-// https://api.themoviedb.org/3/movie/now_playing?api_key=287eadf0e2b2be47d6047e0f6f26a2f5&language=en-US&page=1
-
-
+// ${this.baseUrl}/movie/now_playing?api_key=287eadf0e2b2be47d6047e0f6f26a2f5&language=en-US&page=1

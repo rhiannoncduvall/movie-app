@@ -61,9 +61,11 @@ export class APIDataService {
 
   displayMovies(category: string, title: string) {
     this.pageTitle = title;
+    this.pageLoading = true;
     this.apiService.getMoviesByCategory(category)
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
+        this.pageLoading = false;
 
         // this.data.forEach((movie) => {
         // console.log(movie)
@@ -73,17 +75,21 @@ export class APIDataService {
 
   searchMoviesByKeyword(title: string) {
     this.pageTitle = title;
+    this.pageLoading = true;
     this.apiService.getMoviesBySearch(this.searchKeywords)
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
+        this.pageLoading = false;
     });
   }
 
   displayGenre(genreId: number, title: string) {
     this.pageTitle = title;
+    this.pageLoading = true;
     this.apiService.getByGenre(genreId)
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
+        this.pageLoading = false;
     });
   }
 

@@ -16,7 +16,7 @@
 </div>
 
 <div class="clr-row">
-    <div class="clr-col-4">
+    <div class="clr-col clr-col-lg-3">
         <div class="card-img">
             <img *ngIf="movieService.movieDetails.poster_path !== null" src="https://image.tmdb.org/t/p/w300/{{ movieService.movieDetails.poster_path }}">
         </div>
@@ -27,7 +27,7 @@
 
         <!-- home component loads top rated movies onInit so need to change it to be able to load genre page from here -->
         
-        <!-- <p><span *ngFor="let genre of this.movieService.movieDetails.genres">
+        <!-- <p><span *ngFor="let genre of movieService.movieDetails.genres">
             <button class="btn btn-link" (click)="showGenre(18, 'Romance')" [routerLink]="['/home']">{{ genre.name }} {{genre.id}}</button>
         </span> -->
         <p><span *ngFor="let genre of this.movieService.movieDetails.genres">
