@@ -197,7 +197,7 @@ export class UserService {
   getFavoriteMovies() {
     this.movieService.pageLoading = true;
     this.getUserMovies()
-      .subscribe((res) => {
+      .subscribe((res: FavoriteMovieData) => {
         console.log('getUserFavs results: ' + res)
         this.favoriteMovieDetails = res;
         this.movieService.pageLoading = false;
