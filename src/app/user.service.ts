@@ -169,6 +169,7 @@ export class UserService {
 // subscribe to post request adding a movie to user's favorites on DB
 // ** change parameters to pass through movie_id and title as an object**
   addFavoriteMovie(favMovie: FavMovie) {
+    console.log(favMovie)
     this.postMovie(favMovie)
       .subscribe((res) => {
         alert("Added to favorites")
