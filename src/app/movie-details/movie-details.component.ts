@@ -67,7 +67,6 @@ export class MovieDetailsComponent implements OnInit {
   // this.movieService.displayMovieDetails(movie_id, title);
 
     this.displayMovieDetails(this.movie_id)
-
   }
 
   displayMovieDetails(movie_id: number) {
@@ -76,19 +75,19 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe((res: MovieDetails) => {
         this.movieDetails = res;
         this.movieService.pageLoading = false;
-
+        console.log(this.movieDetails)
+        this.favMovie = {
+          title: this.movieDetails.title,
+          movie_id: this.movieDetails.id,
+          release_date: this.movieDetails.release_date,
+          vote_average: this.movieDetails.vote_average,
+          poster_path: this.movieDetails.poster_path,
+          overview: this.movieDetails.overview,
+        }
       })
   }
 
   addToFavorites() {
-    this.favMovie = {
-      title: this.movieDetails.title,
-      movie_id: this.movieDetails.id,
-      release_date: this.movieDetails.release_date,
-      vote_average: this.movieDetails.vote_average,
-      poster_path: this.movieDetails.poster_path,
-      overview: this.movieDetails.overview,
-    }
     this.userService.addFavoriteMovie(this.favMovie)
   }
 
