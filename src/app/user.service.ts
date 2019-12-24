@@ -180,6 +180,16 @@ export class UserService {
     return this.http.get(`${this.baseUrl}appUsers/${sessionStorage.getItem('userId')}/movies?access_token=${sessionStorage.getItem('token')}`)
   }
 
+
+  getFavoriteMovies() {
+    this.movieService.pageLoading = true;
+    this.getUserMovies()
+      .subscribe((res: FavMovie) => {
+        console.log(res)
+        this.movieService.pageLoading = false;
+    })
+  }
+
 // sets up observable to get all movies by id
 joinFavMovieResponses(favMoviesResponse: any[]) {
   const favMovies = favMoviesResponse.map(movie_id => this.apiService.getMoviesById(movie_id));
@@ -188,23 +198,23 @@ joinFavMovieResponses(favMoviesResponse: any[]) {
 
 // subscribe to get request for all fav movies
 // takes an object of all fav movies and outputs an array of movie_ids as numbers
-getFavoriteMovies() {
-  this.movieService.pageLoading = true;
-  let res_ids = [];
-  this.getUserMovies()
-    .subscribe((res) => {
-      for (let i in res) {
-        res_ids.push(res[i].movie_id);
-      }
-  this.userFavorites = [...new Set(res_ids)];
-  this.joinFavMovieResponses(this.userFavorites)
-    .subscribe((res) => {
-      this.favoriteMovieDetails = res;
-      // console.log(this.favoriteMovieDetails)
-      this.movieService.pageLoading = false;
-  })
-  })
-}
+// getFavoriteMovies() {
+//   this.movieService.pageLoading = true;
+//   let res_ids = [];
+//   this.getUserMovies()
+//     .subscribe((res) => {
+//       for (let i in res) {
+//         res_ids.push(res[i].movie_id);
+//       }
+//   this.userFavorites = [...new Set(res_ids)];
+//   this.joinFavMovieResponses(this.userFavorites)
+//     .subscribe((res) => {
+//       this.favoriteMovieDetails = res;
+//       // console.log(this.favoriteMovieDetails)
+//       this.movieService.pageLoading = false;
+//   })
+//   })
+// }
 
 
 }
