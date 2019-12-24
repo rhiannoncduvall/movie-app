@@ -181,21 +181,21 @@ export class UserService {
     return this.http.get(`${this.baseUrl}appUsers/${sessionStorage.getItem('userId')}/movies?access_token=${sessionStorage.getItem('token')}`)
   }
 
-
   getFavoriteMovies() {
     this.movieService.pageLoading = true;
     this.getUserMovies()
-      .subscribe((res: FavMovie) => {
+      .subscribe((res) => {
         console.log(res)
+        this.favoriteMovieDetails = res;
         this.movieService.pageLoading = false;
     })
   }
 
 // sets up observable to get all movies by id
-joinFavMovieResponses(favMoviesResponse: any[]) {
-  const favMovies = favMoviesResponse.map(movie_id => this.apiService.getMoviesById(movie_id));
-  return forkJoin(favMovies);
-}
+// joinFavMovieResponses(favMoviesResponse: any[]) {
+//   const favMovies = favMoviesResponse.map(movie_id => this.apiService.getMoviesById(movie_id));
+//   return forkJoin(favMovies);
+// }
 
 // subscribe to get request for all fav movies
 // takes an object of all fav movies and outputs an array of movie_ids as numbers

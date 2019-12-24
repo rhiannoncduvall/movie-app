@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { APIDataService } from '../api-data.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { FavMovie } from '../movie-details/movie-details.component';
 
 @Component({
   selector: 'app-favorites',
