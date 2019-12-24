@@ -198,8 +198,11 @@ export class UserService {
     this.movieService.pageLoading = true;
     this.getUserMovies()
       .subscribe((res: FavoriteMovieData) => {
-        console.log('getUserFavs results: ' + res)
-        this.favoriteMovieDetails = res;
+        // console.log('getUserFavs results: ' + res)
+        this.favoriteMovieDetails.results = res;
+        for (let i = 0; i < res.results.length; i++) {
+        console.log(res[i].results)
+        }
         this.movieService.pageLoading = false;
     })
   }
