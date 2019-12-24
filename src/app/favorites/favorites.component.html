@@ -1,50 +1,25 @@
 <h1>My Favorites</h1>
-<!-- <div class="clr-row clr-justify-content-between">
-    <div *ngFor="let movie of this.userService.favoriteMovieDetails" class="clr-col-lg-3 clr-col-md-4 clr-col-12">
-        <div class="card card-size card-container" (click)="navigateToMovieDetails(movie.id)">
-            <div class="card-img">
-                <img src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}">
-            </div>
-            <div class="card-header">
-                {{ movie.title }}
-                {{ movie.name }}
-                {{ movie.id }}
-            </div>
-            <div class="card-block">
-                <div class="card-text">
-                    {{ movie.overview.slice(0, 100) }}...
-                </div>
-            </div>
-            <div class="card-footer clr-footer-alterations">
-                <button class="btn btn-primary btn-sm">{{ movie.vote_average }} <clr-icon shape="star"></clr-icon></button>
-                <button class="btn btn-sm btn-link">{{ movie.release_date }}</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 
 <div class="clr-row clr-justify-content-between">
-    <div *ngFor="let movie of userService.favoriteMovieDetails, index as i" class="clr-col-lg-6 clr-col-12">
-        <div class="card">
+    <div *ngFor="let movie of userService.favoriteMovieDetails" class="clr-col-lg-6 clr-col-12">
+        <div *ngIf="movie.title" class="card">
             <div class="card-header">
-                {{ movie[i].title }} ({{ movie.release_date.slice(0, 4) }})
-                {{ movie.name }}
+                {{ movie.title }} ({{ movie.release_date.slice(0, 4) }})
             </div>
             <div class="card-block">
                 <div class="card-media-block">
-                    <img src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}" class="card-media-image">
+                    <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}" class="card-media-image">
                     <div class="card-media-description">
-                        <span class="card-media-title">
+                        <span *ngIf="movie.release_date" class="card-media-title">
                             Released: {{ movie.release_date }}
                         </span>
-                        <span class="card-media-text">
+                        <span *ngIf="movie.vote_average && movie.vote_average > 0" class="card-media-text">
                             Rating: {{ movie.vote_average }} <clr-icon class="is-solid" shape="star"></clr-icon>
                         </span>
                     </div>
                 </div>
-                <div class="card-text">
-                    {{ movie.overview.slice(0, 100) }}... <a [routerLink]="['/movie-details/', movie.id]">Read more >></a>
+                <div *ngIf="movie.overview" class="card-text">
+                    {{ movie.overview.slice(0, 100) }}... <a [routerLink]="['/movie-details/', movie.movie_id]">Read more >></a>
                 </div>
             </div>
             <div class="card-footer">

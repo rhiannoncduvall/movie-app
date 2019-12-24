@@ -199,9 +199,9 @@ export class UserService {
     this.getUserMovies()
       .subscribe((res: FavoriteMovieData) => {
         // console.log('getUserFavs results: ' + res)
-        this.favoriteMovieDetails.results = res;
-        for (let i = 0; i < res.results.length; i++) {
-        console.log(res[i].results)
+        this.favoriteMovieDetails = res;
+        for (let i = 0; i < this.favoriteMovieDetails.length; i++) {  
+        console.log(this.favoriteMovieDetails[i]) // favoriteMovieDetails is an array of FavMovie objects
         }
         this.movieService.pageLoading = false;
     })

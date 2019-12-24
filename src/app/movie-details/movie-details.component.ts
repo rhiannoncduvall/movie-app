@@ -75,7 +75,6 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe((res: MovieDetails) => {
         this.movieDetails = res;
         this.movieService.pageLoading = false;
-        console.log(this.movieDetails)
         this.favMovie = {
           title: this.movieDetails.title,
           movie_id: this.movieDetails.id,

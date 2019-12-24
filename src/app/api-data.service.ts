@@ -80,6 +80,7 @@ export class APIDataService {
       .subscribe((res: ApiResponse) => {
         this.data = res.results;
         this.pageLoading = false;
+        console.log(this.data)
     });
   }
 
