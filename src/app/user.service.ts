@@ -4,6 +4,7 @@ import { APIDataService } from './api-data.service';
 import { APIService } from './api.service';
 import { forkJoin } from 'rxjs';
 import { FavMovie } from './movie-details/movie-details.component';
+import { RegisterForm } from './login/login.component';
 
 export interface LoginForm {
   username: string,
@@ -89,12 +90,12 @@ export class UserService {
 
 
 // post request to create new user
-  postNewUser(newUser) {
+  postNewUser(newUser: RegisterForm) {
     return this.http.post(`${this.baseUrl}appUsers`, newUser);
   }
 
 // post request to log in user
-  postLogin(credentials) {
+  postLogin(credentials: LoginForm) {
     return this.http.post(`${this.baseUrl}appUsers/login`, credentials)
   }
 
@@ -131,6 +132,9 @@ export class UserService {
         sessionStorage.setItem('token', res.token);
         sessionStorage.setItem('userId', res.userId);
         sessionStorage.setItem('loginResponseId', res.id);
+        this.user.firstName = newUser.firstName;
+        this.user.lastName = newUser.lastName;
+        this.user.email = newUser.email;
         this.populateSessionStorage();
       })
   }
@@ -210,9 +214,9 @@ export class UserService {
       .subscribe((res: FavoriteMovieData) => {
         // console.log('getUserFavs results: ' + res)
         this.favoriteMovieDetails = res;
-        for (let i = 0; i < this.favoriteMovieDetails.length; i++) {  
-        console.log(this.favoriteMovieDetails[i]) // favoriteMovieDetails is an array of FavMovie objects
-        }
+        // for (let i = 0; i < this.favoriteMovieDetails.length; i++) {  
+        // console.log(this.favoriteMovieDetails[i]) // favoriteMovieDetails is an array of FavMovie objects
+        // }
         this.movieService.pageLoading = false;
     })
   }

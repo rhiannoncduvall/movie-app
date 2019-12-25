@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
 
   createAccount() {
     this.userService.createNewAccount(this.registerForm)
-    this.userService.getUserDetails({username:this.registerForm.username, password: this.registerForm.password});
+    // this.userService.getUserDetails({username:this.registerForm.username, password: this.registerForm.password});
     this.navigateToDash()
   }
 
