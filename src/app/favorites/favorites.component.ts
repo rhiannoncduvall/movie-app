@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { APIDataService } from '../api-data.service';
 import { Router } from '@angular/router';
-import { FavMovie } from '../movie-details/movie-details.component';
 
 @Component({
   selector: 'app-favorites',
@@ -17,8 +16,11 @@ export class FavoritesComponent implements OnInit {
     public router: Router,
   ) { }
 
+  showAlertBanner: boolean = false;
+
   ngOnInit() {
     this.displayFavoriteMovies()
+    this.showAlertBanner = false;
   }
 
   displayFavoriteMovies() {
@@ -28,8 +30,19 @@ export class FavoritesComponent implements OnInit {
   }
 
   navigateToMovieDetails(movie_id: number) {
-    // this.router.navigate(['/movie-details']);
     this.router.navigate(['/movie-details/', movie_id]);
+  }
+
+  removeFavMovie(movie_id: string) {
+    this.onDeleteFavMovie(movie_id);
+  }
+
+  onDeleteFavMovie(movie_id: string) {
+    this.userService.deleteFavMovie(movie_id).subscribe((_) => {
+      this.showAlertBanner = true;
+      this.userService.favoriteMovieDetails = null;
+      this.displayFavoriteMovies();
+    });
   }
 
   

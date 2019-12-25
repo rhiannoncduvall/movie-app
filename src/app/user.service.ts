@@ -175,19 +175,29 @@ export class UserService {
 
 // post request for adding a movie to the DB and to the user's favorites
 // ** change parameters to pass through movie_id and title as an object**
-  postMovie(favMovie: FavMovie) {
+  addFavoriteMovie(favMovie: FavMovie) {
     return this.http.post(`${this.baseUrl}appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, favMovie);
   }
 
 
 // subscribe to post request adding a movie to user's favorites on DB
 // ** change parameters to pass through movie_id and title as an object**
-  addFavoriteMovie(favMovie: FavMovie) {
-    this.postMovie(favMovie)
-      .subscribe((res) => {
-        alert("Added to favorites")
-    }, (error) => {console.log(error)})
+  // addFavoriteMovie(favMovie: FavMovie) {
+  //   this.postMovie(favMovie)
+  //     .subscribe((res) => {
+  //       alert("Added to favorites")
+  //   }, (error) => {console.log(error)})
+  // }
+
+  deleteFavMovie(movie_id: string) {
+    return this.http.delete(`${this.baseUrl}appUsers/${sessionStorage.getItem('userId')}/movies/${movie_id}?access_token=${sessionStorage.getItem('token')}`)
   }
+
+  // onDeleteFavMovie(movie_id: string) {
+  //   this.deleteFavMovie(movie_id).subscribe((res) => {
+  //     console.log(res)
+  //   })
+  // }
 
 // get request for grabbing all movies in a user's favorites on the DB
   getUserMovies() {

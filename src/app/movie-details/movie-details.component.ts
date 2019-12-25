@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { APIDataService } from '../api-data.service';
-import { Router, ActivatedRoute, Params, ParamMap} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { UserService } from '../user.service';
 import { MovieDetails } from '../api-data.service';
 import { APIService } from '../api.service';
+import { HomeComponent } from '../home/home.component';
 
 export interface FavMovie {
   title: string,
@@ -11,7 +12,8 @@ export interface FavMovie {
   release_date: string,
   vote_average: number,
   poster_path: string,
-  overview: string
+  overview: string,
+  id: string
 }
 
 @Component({
@@ -37,6 +39,7 @@ export class MovieDetailsComponent implements OnInit {
     vote_average: null,
     id: null,
     production_companies: [],
+    db_id: ''
   }
 
   favMovie: FavMovie = {
@@ -45,8 +48,11 @@ export class MovieDetailsComponent implements OnInit {
     release_date: '',
     vote_average: null,
     poster_path: '',
-    overview: ''
+    overview: '',
+    id: ''
   }
+
+  showAlertBanner: boolean = false;
 
 
   constructor(
@@ -54,18 +60,14 @@ export class MovieDetailsComponent implements OnInit {
     public apiService: APIService,
     private router: Router, 
     private actRoute: ActivatedRoute,
-    public userService: UserService) {
+    public userService: UserService
+  ) {
       this.movie_id = this.actRoute.snapshot.params.id;
      }
 
 
 
   ngOnInit() {
-  // make parameter with movie id and then load the movie details here 
-  // this.router.navigate([`/movie-details/${movie_id}`]);
-
-  // this.movieService.displayMovieDetails(movie_id, title);
-
     this.displayMovieDetails(this.movie_id)
   }
 
@@ -82,24 +84,29 @@ export class MovieDetailsComponent implements OnInit {
           vote_average: this.movieDetails.vote_average,
           poster_path: this.movieDetails.poster_path,
           overview: this.movieDetails.overview,
+          id: this.movieDetails.db_id
         }
       })
   }
 
-  addToFavorites() {
+  onAddFavoriteMovie() {
+    if (this.userService.isLoggedIn === true) {
     this.userService.addFavoriteMovie(this.favMovie)
+      .subscribe((_) => {
+        this.showAlertBanner = true;
+    }, (error) => {console.log(error)})
+  } else {
+    alert('Please log in to add favorites.')
+  }
   }
 
   navigateToHome() {
-    // this.router.navigate(['/movie-details']);
     this.router.navigate(['/home']);
-
-    // this.movieService.displayMovieDetails(movie_id, title);
-    // this.router.navigate(['../movie-details'], { relativeTo: this.route });
-  }
+    }
 
   showGenre(genreId: number, title: string) {
-    this.movieService.displayGenre(genreId, title)
+    this.navigateToHome();
+    this.movieService.displayGenre(genreId, title);
   }
 
 }

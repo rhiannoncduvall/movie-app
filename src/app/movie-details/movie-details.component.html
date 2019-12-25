@@ -1,16 +1,27 @@
+<clr-alert [clrAlertType]="'success'" *ngIf="showAlertBanner">
+    <clr-alert-item>
+        <span class="alert-text">
+            Item added to Favorites.
+        </span>
+    </clr-alert-item>
+</clr-alert>
+
+
 <span *ngIf="movieService.pageLoading === true; else showDetails" class="spinner"></span>
 
 <ng-template #showDetails>
 <div class="clr-row clr-justify-content-between">
     <div class="clr-col">
         <h2>{{ movieDetails.title }} ({{ movieDetails.release_date.slice(0, 4) }}) <span>
+
             <clr-icon shape="bookmark" 
                       size="36" 
-                      class="is-highlight bookmark-icon" 
-                      (click)="addToFavorites()">
-        </clr-icon>
-            <!-- title, id, poster_path, overview, release_date, vote_average, userId -->
-        </span></h2>
+                      class="is-highlight bookmark-icon is-solid" 
+                      (click)="onAddFavoriteMovie()"
+                      alt="Click to add to your Favorites">
+            </clr-icon>
+
+    </span></h2>
         <span>{{ movieDetails.tagline }}</span>
     </div>
 </div>
@@ -31,7 +42,7 @@
             <button class="btn btn-link" (click)="showGenre(18, 'Romance')" [routerLink]="['/home']">{{ genre.name }} {{genre.id}}</button>
         </span> -->
         <p><span *ngFor="let genre of movieDetails.genres">
-                <button class="btn btn-link">{{ genre.name }}</button>
+                <button (click)="showGenre(genre.id, genre.name )" class="btn btn-link"> {{ genre.name }} </button>
             </span>
         </p>
     <p><b>Release Date: </b>{{ movieDetails.release_date }}</p>

@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     vote_average: 0,
     id: 0,
     production_companies: [],
+    db_id: ''
   }
 
   constructor(

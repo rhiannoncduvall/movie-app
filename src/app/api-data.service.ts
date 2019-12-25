@@ -29,6 +29,7 @@ export interface MovieDetails {
   vote_average: number;
   id: number;
   production_companies: any[];
+  db_id: string
 }
 
 @Injectable({
