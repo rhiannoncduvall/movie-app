@@ -75,19 +75,6 @@ export class UserService {
   userFavorites: any[];
   favoriteMovieDetails: any;
   
-  // FavMovie = {
-  //   title: '',
-  //   movie_id: null,
-  //   release_date: '',
-  //   vote_average: null,
-  //   poster_path: '',
-  //   overview: ''
-  // };
-
-
-  // results from the favorites request
-  // favoriteMovieDetails: any;
-
 
 // post request to create new user
   postNewUser(newUser: RegisterForm) {
@@ -126,16 +113,14 @@ export class UserService {
   createNewAccount(newUser) {
     this.postNewUser(newUser)
       .subscribe((res: LoginResponse) => {
-        if (res["error"]["statusCode"] === 422) {
-          return console.log(res["error"]["messages"])
-        }
-        sessionStorage.setItem('token', res.token);
-        sessionStorage.setItem('userId', res.userId);
-        sessionStorage.setItem('loginResponseId', res.id);
+        // if (res["error"]["statusCode"] === 422) {
+        //   return console.log(res["error"]["messages"])
+        // } else {
+        this.getUserDetails(newUser)
         this.user.firstName = newUser.firstName;
         this.user.lastName = newUser.lastName;
         this.user.email = newUser.email;
-        this.populateSessionStorage();
+        // }
       })
   }
 
@@ -169,39 +154,18 @@ export class UserService {
         sessionStorage.setItem('email', res.email);
         sessionStorage.setItem('firstName', res.firstName);
         sessionStorage.setItem('lastName', res.lastName);
-        sessionStorage.setItem('userId', res.id);
         this.user = res;
       });
   }
 
-
-// isLoggedIn: boolean = false;
-
 // post request for adding a movie to the DB and to the user's favorites
-// ** change parameters to pass through movie_id and title as an object**
   addFavoriteMovie(favMovie: FavMovie) {
     return this.http.post(`${this.baseUrl}appUsers/${this.user.id}/movies?access_token=${sessionStorage.getItem('token')}`, favMovie);
   }
 
-
-// subscribe to post request adding a movie to user's favorites on DB
-// ** change parameters to pass through movie_id and title as an object**
-  // addFavoriteMovie(favMovie: FavMovie) {
-  //   this.postMovie(favMovie)
-  //     .subscribe((res) => {
-  //       alert("Added to favorites")
-  //   }, (error) => {console.log(error)})
-  // }
-
   deleteFavMovie(movie_id: string) {
     return this.http.delete(`${this.baseUrl}appUsers/${sessionStorage.getItem('userId')}/movies/${movie_id}?access_token=${sessionStorage.getItem('token')}`)
   }
-
-  // onDeleteFavMovie(movie_id: string) {
-  //   this.deleteFavMovie(movie_id).subscribe((res) => {
-  //     console.log(res)
-  //   })
-  // }
 
 // get request for grabbing all movies in a user's favorites on the DB
   getUserMovies() {
@@ -212,40 +176,10 @@ export class UserService {
     this.movieService.pageLoading = true;
     this.getUserMovies()
       .subscribe((res: FavoriteMovieData) => {
-        // console.log('getUserFavs results: ' + res)
         this.favoriteMovieDetails = res;
-        // for (let i = 0; i < this.favoriteMovieDetails.length; i++) {  
-        // console.log(this.favoriteMovieDetails[i]) // favoriteMovieDetails is an array of FavMovie objects
-        // }
         this.movieService.pageLoading = false;
     })
   }
-
-// sets up observable to get all movies by id
-// joinFavMovieResponses(favMoviesResponse: any[]) {
-//   const favMovies = favMoviesResponse.map(movie_id => this.apiService.getMoviesById(movie_id));
-//   return forkJoin(favMovies);
-// }
-
-// subscribe to get request for all fav movies
-// takes an object of all fav movies and outputs an array of movie_ids as numbers
-// getFavoriteMovies() {
-//   this.movieService.pageLoading = true;
-//   let res_ids = [];
-//   this.getUserMovies()
-//     .subscribe((res) => {
-//       for (let i in res) {
-//         res_ids.push(res[i].movie_id);
-//       }
-//   this.userFavorites = [...new Set(res_ids)];
-//   this.joinFavMovieResponses(this.userFavorites)
-//     .subscribe((res) => {
-//       this.favoriteMovieDetails = res;
-//       // console.log(this.favoriteMovieDetails)
-//       this.movieService.pageLoading = false;
-//   })
-//   })
-// }
 
 
 }

@@ -9,7 +9,7 @@
     </clr-alert-item>
 </clr-alert>
 
-<div class="clr-row clr-justify-content-between">
+<div class="clr-row clr-justify-content-between" *ngIf="userService.isLoggedIn === true; else showLoginPrompt">
     <div *ngFor="let movie of userService.favoriteMovieDetails" class="clr-col-lg-6 clr-col-12">
         <div *ngIf="movie.title" class="card">
             <div class="card-header">
@@ -31,13 +31,15 @@
                     {{ movie.overview.slice(0, 100) }}... <a [routerLink]="['/movie-details/', movie.movie_id]">Read more >></a>
                 </div>
             </div>
-            <div class="card-footer">
-                <button class="btn btn-link btn-sm" id="remove-fav-btn" (click)="removeFavMovie(movie.id)">Remove from favorites</button>
-            </div>
+        <div class="card-footer">
+            <button class="btn btn-link btn-sm" id="remove-fav-btn" (click)="removeFavMovie(movie.id)">Remove from favorites</button>
         </div>
     </div>
+</div>
 
 <!-- shows if user is not logged in -->
 
-<p *ngIf="userService.isLoggedIn === false">You are not logged in. <br>
-<a [routerLink]="['/login']">Log in or Create an Account</a></p>
+<ng-template #showLoginPrompt>
+    <p>You are not logged in. <br>
+    <a [routerLink]="['/login']">Log in or Create an Account</a></p>
+</ng-template>
