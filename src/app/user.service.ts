@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { APIDataService } from './api-data.service';
 import { APIService } from './api.service';
 import { forkJoin } from 'rxjs';
@@ -56,7 +56,6 @@ export class UserService {
   constructor(
     public http: HttpClient,
     private movieService: APIDataService,
-    private apiService: APIService,
   ) { }
 
   baseUrl: string = "https://rcd-movie-app.herokuapp.com/api/";
@@ -109,19 +108,36 @@ export class UserService {
       this.isLoggedIn = false;
   }
 
+
+// HttpErrorResponse
+// error:
+// error:
+// details:
+// codes:
+// email: ["presence"]
+// firstName: ["presence"]
+// lastName: ["presence"]
+// username: ["uniqueness"]
+
   // subscribe for create new account post request
   createNewAccount(newUser) {
     this.postNewUser(newUser)
-      .subscribe((res: LoginResponse) => {
-        // if (res["error"]["statusCode"] === 422) {
-        //   return console.log(res["error"]["messages"])
-        // } else {
-        this.getUserDetails(newUser)
-        this.user.firstName = newUser.firstName;
-        this.user.lastName = newUser.lastName;
-        this.user.email = newUser.email;
-        // }
-      })
+      .subscribe(
+        (res: LoginResponse) => {
+          this.getUserDetails(newUser)
+          this.user.firstName = newUser.firstName;
+          this.user.lastName = newUser.lastName;
+          this.user.email = newUser.email;
+      },
+      (error) => {
+        console.log(error.error.details.messages)
+        // let httpError = JSON.stringify(error.error)
+        // JSON.parse(httpError, (key, value) => {
+        //   if (key === 'codes') {
+        //     console.log(`${key}: ${value}`)
+          // }
+        });
+      // })
   }
 
 // subscribe for log out post request
@@ -129,7 +145,7 @@ export class UserService {
     this.postLogout()
       .subscribe((res) => {
       this.clearUserInfo();
-    }, (error) => {console.log(error)})
+    }, (error: HttpErrorResponse) => {(error)})
 
   }
 
